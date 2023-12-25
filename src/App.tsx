@@ -14,7 +14,6 @@ const { Header, Sider, Content } = Layout;
 export function App() {
   const navigate = useNavigate();
   const path = useLocation().pathname.split("/")[2];
-  console.log(path);
 
   if (!path) {
     redirect("/admin/awards");
@@ -24,10 +23,18 @@ export function App() {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: collapsed ? "center" : "flex-start",
+            alignItems: "center",
+            flexWrap: "nowrap",
+          }}
+        >
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -40,7 +47,12 @@ export function App() {
             }}
           />
           <span
-            style={{ color: "white", display: collapsed ? "none" : "inline" }}
+            style={{
+              opacity: collapsed ? 0 : 1,
+              color: "white",
+              display: collapsed ? "none" : "inline",
+              transition: "opacity 1s ease-out",
+            }}
           >
             Awardlys
           </span>
