@@ -7,10 +7,19 @@ import {
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { useState } from "react";
+import { Outlet, useNavigate, useLocation, redirect } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 
 export function App() {
+  const navigate = useNavigate();
+  const path = useLocation().pathname.split("/")[2];
+  console.log(path);
+
+  if (!path) {
+    redirect("/admin/awards");
+  }
+  console.log();
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -30,7 +39,6 @@ export function App() {
               color: "white",
             }}
           />
-
           <span
             style={{ color: "white", display: collapsed ? "none" : "inline" }}
           >
@@ -41,20 +49,23 @@ export function App() {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={[path]}
           items={[
             {
-              key: "1",
+              key: "awards",
+              onClick: () => navigate("/admin/awards"),
               icon: <UserOutlined />,
               label: "Premiações",
             },
             {
-              key: "2",
+              key: "categories",
+              onClick: () => navigate("/admin/categories"),
               icon: <VideoCameraOutlined />,
               label: "Categorias",
             },
             {
-              key: "3",
+              key: "games",
+              onClick: () => navigate("/admin/games"),
               icon: <UploadOutlined />,
               label: "Jogos",
             },
@@ -72,7 +83,7 @@ export function App() {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
