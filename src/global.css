@@ -8,3 +8,16 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
 }
+
+.head-container {
+  display: flex;
+  background-color: #fff;
+  border-radius: 8px;
+  justify-content: end;
+
+  &>div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+}
