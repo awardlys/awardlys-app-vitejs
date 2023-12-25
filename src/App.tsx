@@ -5,9 +5,9 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
+import { Avatar, Button, Layout, Menu, theme } from "antd";
 import { useState } from "react";
-import { Outlet, useNavigate, useLocation, redirect } from "react-router-dom";
+import { Outlet, redirect, useLocation, useNavigate } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 
@@ -73,7 +73,12 @@ export function App() {
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}></Header>
+        <Header  className="head-container">
+          <div>
+            <Avatar icon={<UserOutlined/>}/>
+            <span>Rivaldo Mascarenhas</span>
+          </div>
+        </Header>
         <Content
           style={{
             margin: "24px 16px",
