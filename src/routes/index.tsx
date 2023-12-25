@@ -22,4 +22,20 @@ export const route = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/",
+    element: (
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        {" "}
+        Vixee!!! Não temos nada por aqui... Tenta usar "/admin"
+      </div>
+    ),
+  },
 ]);
