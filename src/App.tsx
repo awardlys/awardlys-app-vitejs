@@ -9,7 +9,7 @@ import { Avatar, Button, Layout, Menu, theme } from "antd";
 import { useState } from "react";
 import { Outlet, redirect, useLocation, useNavigate } from "react-router-dom";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 export function App() {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ export function App() {
         </Header>
         <Content
           style={{
-            margin: "24px 16px",
+            margin: "24px 16px 0 16px",
             padding: 24,
             minHeight: 280,
             background: colorBgContainer,
@@ -102,6 +102,7 @@ export function App() {
         >
           <Outlet />
         </Content>
+        <Footer style={{ textAlign: "center" }}>Awardlys ©2024</Footer>
       </Layout>
     </Layout>
   );
