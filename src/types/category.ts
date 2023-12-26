@@ -1,9 +1,12 @@
-export type Category = {
+export interface Category {
   id: string;
-  title: string;
+  name: string;
   description: string;
-  platform: string;
-  image_url: string;
   createdAt: string;
   updatedAt: string;
-};
+}
+
+export interface ValueProps {
+  title: string;
+  description: string;
+}

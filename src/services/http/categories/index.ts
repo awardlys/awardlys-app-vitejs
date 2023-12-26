@@ -2,11 +2,11 @@ import { message } from "antd";
 import { api } from "../api";
 import { Category } from "../../../types";
 
-export const getCategory = async (): Promise<Category[]> => {
+export const getCategories = async (): Promise<Category[]> => {
   try {
     const output = await api.get("/categories");
 
-    return output.data?.games;
+    return output.data?.categories;
   } catch (error) {
     message.error("Não foi possível buscar os categorias");
     return [];
@@ -33,7 +33,7 @@ export const postCategory = async (
   }
 };
 
-export const updateGame = async (
+export const updateCategory = async (
   id: string,
   data: Omit<Category, "id" | "createdAt" | "updatedAt">
 ) => {
