@@ -1,37 +1,54 @@
-import { Input, Table } from "antd";
-import { SearchProps } from "antd/es/input";
-import { useState } from "react";
-import { awards } from "../../data";
-import "./style.css";
+import { Button, Col, Input, Row, Table, Tooltip } from "antd";
+import { PlusOutlined, ReloadOutlined } from "@ant-design/icons";
 
-const {Search} = Input;
+import { FormModal } from "./components/form";
+import "./style.css";
+import { useCategory } from "./hooks";
+
+const { Search } = Input;
 
 export function Categories() {
-  const [search, setSearch] = useState(awards);
-  const onSearch: SearchProps["onSearch"] = (value) => {
-    const search = awards.filter((item) =>
-      item.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-    );
-    setSearch(search);
-  };
-
+  const { isModalOpen, onSearch, search, setIsModalOpen } = useCategory()
   return (
-    <div className="container-categories">
-      <Search placeholder="Pesquise" onSearch={onSearch} />
-      <Table
-        dataSource={search}
-        columns={[
-          {
-            dataIndex: "title",
-            title: "Nome",
-            sorter: (a, b) => a.title.localeCompare(b.title),
-          },
-          {
-            dataIndex: "subTitle",
-            title: "Descrição",
-          },
-        ]}
-      />
-    </div>
+    <main className="container-categories">
+      <Row gutter={[24, 24]} justify={"end"}>
+        <Col>
+          <Button type="primary" className="button-new-category" onClick={() => setIsModalOpen(true)} icon={<PlusOutlined />}>
+            Novo
+          </Button>
+        </Col>
+      </Row>
+      <Row gutter={[24, 24]}>
+        <Col sm={24} md={16} lg={12} xl={8}>
+          <Search placeholder="Pesquise pelo nome" onSearch={onSearch} />
+        </Col>
+        <Col >
+          <Tooltip>
+            <Button icon={<ReloadOutlined />}>
+              Atualizar
+            </Button>
+          </Tooltip>
+        </Col>
+      </Row>
+      <Row gutter={[24, 24]}>
+        <Col span={24}>
+          <Table
+            dataSource={search}
+            columns={[
+              {
+                dataIndex: "title",
+                title: "Nome",
+                sorter: (a, b) => a.title.localeCompare(b.title),
+              },
+              {
+                dataIndex: "subTitle",
+                title: "Descrição",
+              },
+            ]}
+          />
+        </Col>
+      </Row>
+      <FormModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+    </main>
   );
 }

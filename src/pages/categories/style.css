@@ -1,5 +1,11 @@
 .container-categories {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 24px;
+}
+.button-new-category{
+  margin-left: auto;
+}
+.search{
+  width: 30%;
 }
