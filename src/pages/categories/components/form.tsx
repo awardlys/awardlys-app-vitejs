@@ -1,10 +1,21 @@
 import { Button, Form, Input, Modal, Space } from "antd";
 import { useFormCategory } from "../hooks";
-import { useStoreCategory } from "../store";
 
 export function FormModal() {
-  const { form, onFinish } = useFormCategory();
-  const { isModalOpen, setIsModalOpen } = useStoreCategory()
+  const {
+    form,
+    onFinish,
+    submitTable,
+    isModalOpen,
+    setIsModalOpen,
+    categoryEdit,
+    setCategoryEdit,
+  } = useFormCategory();
+
+  form.setFieldValue("name", categoryEdit?.name);
+  form.setFieldValue("description", categoryEdit?.description);
+  categoryEdit === null && form.setFieldValue("description", "");
+  categoryEdit === null && form.setFieldValue("name", "");
 
   return (
     <Modal
@@ -12,8 +23,14 @@ export function FormModal() {
       title="Nova Categoria"
       footer={false}
       open={isModalOpen}
-      onOk={() => setIsModalOpen(false)}
-      onCancel={() => setIsModalOpen(false)}
+      onOk={() => {
+        setIsModalOpen(false);
+        setCategoryEdit(null);
+      }}
+      onCancel={() => {
+        setIsModalOpen(false);
+        setCategoryEdit(null);
+      }}
     >
       <Form
         onFinish={onFinish}
@@ -24,7 +41,7 @@ export function FormModal() {
       >
         <Form.Item
           hasFeedback
-          name="title"
+          name="name"
           label="Nome"
           rules={[{ required: true, message: "Por favor digite um titulo" }]}
         >
@@ -42,13 +59,13 @@ export function FormModal() {
         </Form.Item>
         <Form.Item>
           <Space>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" loading={submitTable} htmlType="submit">
               Submit
             </Button>
             <Button htmlType="reset">Reset</Button>
           </Space>
         </Form.Item>
       </Form>
-    </Modal >
+    </Modal>
   );
 }
