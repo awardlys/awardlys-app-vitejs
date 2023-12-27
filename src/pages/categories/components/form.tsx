@@ -1,5 +1,6 @@
 import { Button, Form, Input, Modal, Space } from "antd";
 import { useFormCategory } from "../hooks";
+import { useEffect } from "react";
 
 export function FormModal() {
   const {
@@ -12,10 +13,10 @@ export function FormModal() {
     setCategoryEdit,
   } = useFormCategory();
 
-  form.setFieldValue("name", categoryEdit?.name);
-  form.setFieldValue("description", categoryEdit?.description);
-  categoryEdit === null && form.setFieldValue("description", "");
-  categoryEdit === null && form.setFieldValue("name", "");
+  useEffect(() => {
+    form.setFieldValue("name", categoryEdit?.name);
+    form.setFieldValue("description", categoryEdit?.description);
+  }, [categoryEdit, form]);
 
   return (
     <Modal
