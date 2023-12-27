@@ -8,7 +8,7 @@ export const getCategories = async (): Promise<Category[]> => {
 
     return output.data?.categories;
   } catch (error) {
-    message.error("Não foi possível buscar os categorias");
+    message.error("Não foi possível buscar as categorias");
     return [];
   }
 };
@@ -24,7 +24,7 @@ export const postCategory = async (
       return false;
     }
 
-    message.success("Category adicionada com sucesso");
+    message.success("Categoria adicionada com sucesso");
 
     return true;
   } catch (error) {
@@ -49,7 +49,7 @@ export const updateCategory = async (
 
     return true;
   } catch (error) {
-    message.error("Não foi possível criar o categoria");
+    message.error("Não foi possível criar a categoria");
     return false;
   }
 };
@@ -57,7 +57,7 @@ export const updateCategory = async (
 export const deleteGame = async (id: string): Promise<void> => {
   try {
     await api.delete(`/categories/${id}`);
-    message.info("Categoria excluído com sucesso");
+    message.info("Categoria excluída com sucesso");
   } catch (error) {
     message.error("Não foi possível excluir a categoria");
   }
