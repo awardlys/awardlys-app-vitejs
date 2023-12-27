@@ -1,17 +1,43 @@
-import { useState } from "react";
-import { awards } from "../../../data";
-import { SearchProps } from "antd/es/input";
+import { useEffect } from "react";
 import { useStoreCategory } from "../store";
+import { getCategories } from "../../../services/http/categories";
+import { message } from "antd";
+import dayjs from "dayjs";
 
 export function useCategory() {
-  const [search, setSearch] = useState(awards);
-  const { isModalOpen, setIsModalOpen } = useStoreCategory();
-  const onSearch: SearchProps["onSearch"] = (value) => {
-    const search = awards.filter((item) =>
-      item.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-    );
-    setSearch(search);
-  };
+  const {
+    tryAgain,
+    setCategoriesData,
+    setLoading,
+    setTryAgain,
+    categoriesData,
+  } = useStoreCategory();
 
-  return { search, setSearch, onSearch, isModalOpen, setIsModalOpen };
+  const onSearch = (value: string) =>
+    categoriesData.filter((item) =>
+      item.name.toLocaleLowerCase().includes(value.toLocaleLowerCase().trim())
+    );
+
+  useEffect(() => {
+    if (!tryAgain) {
+      return;
+    }
+    setLoading(true);
+    getCategories()
+      .then((res) =>
+        setCategoriesData(
+          res.map((category) => ({
+            ...category,
+            createdAt: dayjs(category.createdAt).format("DD/MM/YYYY HH:MM"),
+          }))
+        )
+      )
+      .catch((err) => message.error(err))
+      .finally(() => {
+        setLoading(false);
+        setTryAgain(false);
+      });
+  }, [setCategoriesData, setLoading, setTryAgain, tryAgain]);
+
+  return { onSearch };
 }
