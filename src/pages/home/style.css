@@ -1,3 +1,25 @@
+:root {
+ --cor-background:#f0f0f0;
+ --cor-text:  #001529;
+}
+.dark-mode {
+  --cor-background:#001529;
+ --cor-text:#f0f0f0;
+}
+
 .container-home {
   display: flex;
+  position: relative;
+  flex-direction: column;
+  height: 100vh;
+  gap: 2rem;
+  background-color: var(--cor-background);
+  color: var(--cor-text);
+  -webkit-font-smoothing: antialiased;
+  & > button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 6rem;
+  }
 }
