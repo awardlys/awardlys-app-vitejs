@@ -54,7 +54,7 @@ export const updateCategory = async (
   }
 };
 
-export const deleteGame = async (id: string): Promise<void> => {
+export const deleteCategory = async (id: string): Promise<void> => {
   try {
     await api.delete(`/categories/${id}`);
     message.info("Categoria excluída com sucesso");

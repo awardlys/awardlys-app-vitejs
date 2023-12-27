@@ -7,6 +7,9 @@ export interface Category {
 }
 
 export interface ValueProps {
-  title: string;
+  name: string;
   description: string;
+}
+export interface TableCategoryProps {
+  search: Category[] | undefined;
 }
