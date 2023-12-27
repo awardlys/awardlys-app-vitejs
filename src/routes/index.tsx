@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { App } from "../App";
-import { Awards, Categories, Games } from "../pages";
+import { Awards, Categories, Games, Home } from "../pages";
 
 export const route = createBrowserRouter([
   {
@@ -24,18 +24,6 @@ export const route = createBrowserRouter([
   },
   {
     path: "/",
-    element: (
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        {" "}
-        Vixee!!! Não temos nada por aqui... Tenta usar "/admin"
-      </div>
-    ),
+    element: <Home />,
   },
 ]);
