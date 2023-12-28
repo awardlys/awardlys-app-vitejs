@@ -9,13 +9,13 @@ export function Home() {
   const [mode, setMode] = useState(false);
   return (
     <main className={`container-home ${mode ? "dark-mode" : ""}`}>
+      <Header />
+      <Content />
       <Button
         type={mode ? "default" : "primary"}
         icon={mode ? <BulbTwoTone /> : <BulbFilled />}
         onClick={() => setMode(!mode)}
       />
-      <Header />
-      <Content />
     </main>
   );
 }
