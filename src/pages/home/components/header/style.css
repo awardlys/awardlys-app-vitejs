@@ -4,21 +4,11 @@
   background-color: var(--header-background);
   color: var(--cor-text);
   padding: 1rem;
-  font-family: "Playfair Display", serif;
   & > div {
-    width: 1444px;
-    margin: auto;
     display: flex;
     justify-content: space-between;
-  }
-}
-
-.container-logo {
-  user-select: none;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  & > img {
-    width: 10%;
+    align-items: center;
+    max-width: 1024px;
+    margin: auto;
   }
 }
