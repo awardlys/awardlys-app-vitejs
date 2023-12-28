@@ -1,12 +1,7 @@
 :root {
-  --header-background:#a3a3a3;
- --cor-background:#f0f0f0;
- --cor-text:  #001529;
-}
-.dark-mode {
-  --header-background:#002c55;
-  --cor-background:#001529;
- --cor-text:#f0f0f0;
+  --header-background: #00060c;
+  --cor-background: #001529;
+  --cor-text: #f0f0f0;
 }
 
 .container-home {
@@ -14,14 +9,7 @@
   position: relative;
   flex-direction: column;
   height: 100vh;
-  gap: 2rem;
-  background-color: var(--cor-background);
+  background: linear-gradient(45deg, #000 0%, rgba(0, 0, 0, 0) 100%);
   color: var(--cor-text);
   -webkit-font-smoothing: antialiased;
-  & > button {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 6rem;
-  }
 }
