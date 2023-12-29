@@ -1,0 +1,15 @@
+:root {
+  --header-background: #00060c;
+  --cor-background: #001529;
+  --cor-text: #f0f0f0;
+}
+
+.container-home {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(45deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+  color: var(--cor-text);
+  -webkit-font-smoothing: antialiased;
+}

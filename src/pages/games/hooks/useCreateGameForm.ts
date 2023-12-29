@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from "react";
-import { Game } from "../../../types";
 import { createGame, updateGame } from "../../../services/http/games";
+import { Game } from "../../../types";
 import { useStoreGame } from "../store";
 
 type GameInput = Omit<Game, "id" | "createdAt" | "updatedAt">;
 
 export const useCreateGameForm = () => {
-  const { setOpen, setHasFetch, editGame } = useStoreGame();
+  const { setOpen, setHasFetch, editGame, setEditGame } = useStoreGame();
 
   const onFinish = useCallback(
     async (data: GameInput) => {
@@ -15,9 +15,10 @@ export const useCreateGameForm = () => {
         : await createGame(data);
 
       setHasFetch(false);
+      setEditGame(undefined);
       setOpen(!output);
     },
-    [editGame?.id, setHasFetch, setOpen]
+    [editGame?.id, setEditGame, setHasFetch, setOpen]
   );
 
   const values = useMemo(
