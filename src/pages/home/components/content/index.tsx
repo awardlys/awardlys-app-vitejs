@@ -7,7 +7,7 @@ export function Content() {
       <div className="overlay">
         <div className="description">
           <div>
-            <h2>Sobre o Projeto</h2>
+            <h2>Sobre o Projeto:</h2>
             <p>
               O Awardlys App é uma aplicação web construída com{" "}
               <Link className="link" to={"https://vitejs.dev"} target="_blank">
