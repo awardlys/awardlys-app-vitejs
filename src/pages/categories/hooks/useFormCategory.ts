@@ -1,10 +1,10 @@
 import { Form } from "antd";
 import { useState } from "react";
-import { ValueProps } from "../../../types";
 import {
   postCategory,
   updateCategory,
 } from "../../../services/http/categories";
+import { ValueProps } from "../../../types";
 import { useStoreCategory } from "../store";
 
 export function useFormCategory() {
@@ -17,6 +17,7 @@ export function useFormCategory() {
   } = useStoreCategory();
   const [form] = Form.useForm<ValueProps>();
   const [submitTable, setSubmitTable] = useState(false);
+
   const onFinish = async (value: ValueProps) => {
     setSubmitTable(true);
     if (categoryEdit?.id) {
@@ -30,6 +31,7 @@ export function useFormCategory() {
     setTryAgain(true);
     form.resetFields();
   };
+
   return {
     form,
     submitTable,
