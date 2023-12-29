@@ -13,8 +13,10 @@ export function AwardlysModal({ open, setOpen }: Readonly<AwardlysModalProps>) {
   const [form] = Form.useForm<Award>();
   useEffect(() => {
     if (!editAward) {
+      console.log(editAward, "Não passou");
       return;
     }
+    console.log(editAward, "Passou");
 
     form.setFieldValue("title", editAward.title);
     form.setFieldValue("description", editAward.description);
@@ -23,10 +25,16 @@ export function AwardlysModal({ open, setOpen }: Readonly<AwardlysModalProps>) {
   return (
     <div>
       <Modal
+        onOk={() => {
+          setOpen(false);
+          setEditAward(undefined);
+          form.resetFields();
+        }}
         destroyOnClose
         footer={false}
         open={open}
         onCancel={() => {
+          form.resetFields();
           setEditAward(undefined);
           setOpen(false);
         }}
@@ -39,9 +47,11 @@ export function AwardlysModal({ open, setOpen }: Readonly<AwardlysModalProps>) {
               ? await updateAward(editAward.id, values)
               : await createAward(values);
             if (response) {
+              setEditAward(undefined);
               setOpen(false);
               setHasFetch(false);
             }
+            form.resetFields();
           }}
           layout="vertical"
           name="basic"
