@@ -1,6 +1,7 @@
 import { Button, Modal, Space, Table, Tag } from "antd";
 import { Award } from "../../../types";
 import {
+  ArrowRightOutlined,
   DeleteOutlined,
   EditOutlined,
   ExclamationCircleOutlined,
@@ -8,12 +9,14 @@ import {
 import { useStoreAward } from "../Store";
 import { useCallback } from "react";
 import { deleteAward } from "../../../services/http/awards";
+import { useNavigate } from "react-router-dom";
 
 interface AwardlysTableProps {
   search: Award[];
 }
 
 export function AwardlysTable({ search }: Readonly<AwardlysTableProps>) {
+  const navigate = useNavigate();
   const { setLoading, setHasFetch, loading, setEditAward, setOpen } =
     useStoreAward();
 
@@ -90,6 +93,12 @@ export function AwardlysTable({ search }: Readonly<AwardlysTableProps>) {
                     title="Editar"
                     icon={<EditOutlined />}
                     onClick={() => handleEdit(record)}
+                  />
+                  <Button
+                    type="text"
+                    title="Ativar"
+                    icon={<ArrowRightOutlined />}
+                    onClick={() => navigate(`/admin/awards/${id}`)}
                   />
                 </Space>
               );

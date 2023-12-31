@@ -2,6 +2,16 @@ import { message } from "antd";
 import { api } from "../api";
 import { Award } from "../../../types";
 
+export const getAward = async (id: string): Promise<Award | undefined> => {
+  try {
+    const output = await api.get(`/awards/${id}`);
+
+    return output.data;
+  } catch (error) {
+    message.error("Não foi possível buscar o jogo");
+  }
+};
+
 export const fetchAward = async (): Promise<Award[]> => {
   try {
     const output = await api.get("/awards");

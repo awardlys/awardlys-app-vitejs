@@ -1,5 +1,11 @@
-.div-container{
+.div-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.award-title {
+  display: flex;
+  align-content: center;
+  gap: 8px;
 }
