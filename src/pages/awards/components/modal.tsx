@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal, Space } from "antd";
 import { Award } from "../../../types";
 import { createAward, updateAward } from "../../../services/http/awards";
-import { useStoreAward } from "../Store";
+import { useStoreAward } from "../store";
 import { useEffect } from "react";
 interface AwardlysModalProps {
   open: boolean;

@@ -6,7 +6,7 @@ import {
   EditOutlined,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
-import { useStoreAward } from "../Store";
+import { useStoreAward } from "../store";
 import { useCallback } from "react";
 import { deleteAward } from "../../../services/http/awards";
 import { useNavigate } from "react-router-dom";
@@ -68,12 +68,14 @@ export function AwardlysTable({ search }: Readonly<AwardlysTableProps>) {
           {
             dataIndex: "status",
             title: "Status da Premiação",
-            render: (status) => {
-              return (
-                <Tag color={status ? "green" : "red"}>
-                  {status ? "Ativo" : "Expirado"}
-                </Tag>
-              );
+            render: (status: string) => {
+              const colors = {
+                draft: "warning",
+                active: "green",
+                expired: "red",
+              } as Record<string, string>;
+
+              return <Tag color={colors[status]}>{status}</Tag>;
             },
           },
           {

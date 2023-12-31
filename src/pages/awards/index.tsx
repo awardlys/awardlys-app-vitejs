@@ -1,12 +1,12 @@
-import { AwardlysTable } from "./Components/table";
-import "./style.css";
+import { AwardlysTable } from "./components/table";
 import Search from "antd/es/input/Search";
-import { AwardlysModal } from "./Components/modal";
+import { AwardlysModal } from "./components/modal";
 import { Button, Col, Row, Tooltip, message } from "antd";
 import { PlusOutlined, ReloadOutlined } from "@ant-design/icons";
-import { useAwards } from "./Hooks/useAwards";
+import { useAwards } from "./hooks/useAwards";
 import { useState } from "react";
-import { useStoreAward } from "./Store";
+import { useStoreAward } from "./store";
+import "./style.css";
 
 export function Awards() {
   const { setHasFetch, setOpen, open, search, setSearch } = useStoreAward();
