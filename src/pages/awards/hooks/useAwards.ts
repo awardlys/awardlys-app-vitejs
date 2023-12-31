@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { useStoreAward } from "../Store";
+import { useStoreAward } from "../store";
 import { fetchAward } from "../../../services/http/awards";
 import dayjs from "dayjs";
 

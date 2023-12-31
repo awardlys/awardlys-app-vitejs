@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { App } from "../App";
 import { Awards, Categories, Games, Home } from "../pages";
+import { AwardsAttach } from "../pages/awards/[id]";
 
 export const route = createBrowserRouter([
   {
@@ -10,6 +11,7 @@ export const route = createBrowserRouter([
     children: [
       {
         path: "awards",
+
         element: <Awards />,
       },
       {
@@ -19,6 +21,10 @@ export const route = createBrowserRouter([
       {
         path: "games",
         element: <Games />,
+      },
+      {
+        path: "awards/:awardId",
+        element: <AwardsAttach />,
       },
     ],
   },
