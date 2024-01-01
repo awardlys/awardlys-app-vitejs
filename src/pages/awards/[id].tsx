@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getAward } from "../../services/http/awards";
-import { Award, Category, Game } from "../../types";
 import {
   Button,
   Card,
@@ -20,33 +16,23 @@ import {
   LeftOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
+import { useAwardId } from "./hooks/useAwardId";
 
 import "./style.css";
-import { getCategories } from "../../services/http/categories";
-import { fetchGames } from "../../services/http/games";
 
 export function AwardsAttach() {
-  const navigate = useNavigate();
-  const { awardId } = useParams();
-  const [open, setOpen] = useState(false);
-  const [openGames, setOpenGames] = useState(false);
-  const [openView, setOpenView] = useState(false);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [data, setData] = useState<any[]>([]);
-  const [games, setGames] = useState<Game[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState();
-
-  const [award, setAward] = useState<Award | undefined>(undefined);
-
-  useEffect(() => {
-    if (!awardId) {
-      return;
-    }
-
-    fetchGames().then((data) => setGames(data));
-    getCategories().then((data) => setCategories(data));
-    getAward(awardId).then((data) => setAward(data));
-  }, [awardId]);
+  const {
+    data,
+    games,
+    award,
+    modal,
+    setData,
+    navigate,
+    setModal,
+    categories,
+    selectedCategory,
+    setSelectedCategory,
+  } = useAwardId();
 
   return (
     <main>
@@ -68,7 +54,12 @@ export function AwardsAttach() {
             alignItems: "center",
           }}
         >
-          <Button type="text" onClick={() => setOpen(true)}>
+          <Button
+            type="text"
+            onClick={() =>
+              setModal((prev) => ({ ...prev, selectCategories: true }))
+            }
+          >
             <PlusOutlined />
             <span>Adicionar categorias</span>
           </Button>
@@ -109,7 +100,7 @@ export function AwardsAttach() {
                     <EditOutlined
                       onClick={() => {
                         setSelectedCategory(item.id);
-                        setOpenGames(true);
+                        setModal((prev) => ({ ...prev, selectGames: true }));
                       }}
                     />
                   </Tooltip>,
@@ -117,7 +108,7 @@ export function AwardsAttach() {
                     <EyeOutlined
                       onClick={() => {
                         setSelectedCategory(item.id);
-                        setOpenView(true);
+                        setModal((prev) => ({ ...prev, viewGames: true }));
                       }}
                     />
                   </Tooltip>,
@@ -142,9 +133,11 @@ export function AwardsAttach() {
 
       <Modal
         title="Selecione as categorias"
-        open={open}
-        onCancel={() => setOpen(false)}
-        onOk={() => setOpen(false)}
+        open={modal.selectCategories}
+        onCancel={() =>
+          setModal((prev) => ({ ...prev, selectCategories: false }))
+        }
+        onOk={() => setModal((prev) => ({ ...prev, selectCategories: false }))}
         okText="Continuar"
         cancelText="Voltar"
       >
@@ -169,9 +162,9 @@ export function AwardsAttach() {
       <Modal
         destroyOnClose
         title="Selecione os jogos"
-        open={openGames}
-        onCancel={() => setOpenGames(false)}
-        onOk={() => setOpenGames(false)}
+        open={modal.selectGames}
+        onCancel={() => setModal((prev) => ({ ...prev, selectGames: false }))}
+        onOk={() => setModal((prev) => ({ ...prev, selectGames: false }))}
         okText="Continuar"
         cancelText="Voltar"
       >
@@ -201,9 +194,9 @@ export function AwardsAttach() {
       <Modal
         destroyOnClose
         title="Jogos selecionados"
-        open={openView}
-        onCancel={() => setOpenView(false)}
-        onOk={() => setOpenView(false)}
+        open={modal.viewGames}
+        onCancel={() => setModal((prev) => ({ ...prev, viewGames: false }))}
+        onOk={() => setModal((prev) => ({ ...prev, viewGames: false }))}
         okText="Continuar"
         cancelText="Voltar"
       >
@@ -223,7 +216,7 @@ export function AwardsAttach() {
 
             return data[categoryIndex]?.games?.includes(game.id);
           })}
-          renderItem={(item: any) => <List.Item>{item?.title}</List.Item>}
+          renderItem={(item) => <List.Item>{item?.title}</List.Item>}
         />
       </Modal>
     </main>
